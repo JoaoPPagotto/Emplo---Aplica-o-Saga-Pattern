@@ -12,7 +12,9 @@ namespace Emplo___Aplicação_Saga_Pattern.SagaPattern.Busisnes.Model.Repository
     {
         void IDepositoRepository.Depositar(ContaBancaria conta, double valorDepositar)
         {
+            double valorOriginal = conta.saldo;
             conta.saldo += valorDepositar;
+            Console.WriteLine("\nSaldo original da conta : " + valorOriginal + "\n Valor a depositar: " + valorDepositar + "\nNovo saldo: " + conta.saldo);
         }
     }
 }

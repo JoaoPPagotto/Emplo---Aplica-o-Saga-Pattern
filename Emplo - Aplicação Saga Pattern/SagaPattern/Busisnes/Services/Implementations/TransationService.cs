@@ -36,25 +36,30 @@ namespace Emplo___Aplicação_Saga_Pattern.SagaPattern.Busisnes.Services.Impleme
             {
                 if (valorTransferir <= contaOrigem.saldo)
                 {
+                    Console.WriteLine("\n#INICIANDO SAQUE#\n");
                     _saqueRepository.Sacar(contaOrigem, valorTransferir);
                 }
                 else
                 {
+                    Console.WriteLine("\n#INICIANDO COMPENSACAO DO SAQUE#\n");
                     throw new Exception("Saldo menor que o valor para transferir");
                 }
             }
             catch 
             {
+                Console.WriteLine("\n#INICIANDO SAQUE#\n");
                 _saqueCompensation.CompensarSaque(contaOrigem, valorOrigem);
                 throw new Exception("Erro ao subtrair saldo da conta origem");
             }
 
             try
             {
+                Console.WriteLine("\n#INICIANDO DEPOSITO#\n");
                 _depositoRepository.Depositar(contaDestino, valorTransferir);
             }
             catch
             {
+                Console.WriteLine("\n#INICIANDO COMPENSACAO DO DEPOSITO#\n");
                 _depositoCompensation.CompensarDeposito(contaOrigem , valorOrigem);
                 throw new Exception("Erro ao depositar valor na conta destino");
             }

@@ -12,7 +12,9 @@ namespace Emplo___Aplicação_Saga_Pattern.SagaPattern.Busisnes.Model.Repository
     {
         void ISaqueRepository.Sacar(ContaBancaria conta, double valorSacar)
         {
+            double valorOriginal = conta.saldo;
             conta.saldo -= valorSacar;
+            Console.WriteLine("\nSaldo original da conta : " + valorOriginal + "\n Valor sacado: " + valorSacar + "\nNovo saldo: "+conta.saldo);
         }
     }
 }
